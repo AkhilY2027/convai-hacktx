@@ -593,15 +593,26 @@ def generate_mfa_comparison(user_audio: str, ref_audio: str, transcript: str, ou
 # STEP 6: EXAMPLE USAGE
 # -----------------------------
 if __name__ == "__main__":
-    # You can swap these depending on which is the user's attempt and which is the reference
-    user_audio = "ref2.mp3"
-    reference_audio = "good_brooklyn_rags.mp3"
+    import sys
+    if len(sys.argv) < 3:
+        print(json.dumps({"error": "Usage: python audioComparison.py <user_audio> <ref_audio>"}))
+        sys.exit(1)
+    
+    user_audio = sys.argv[1]
+    reference_audio = sys.argv[2]
 
     try:
         score, weak_phonemes, ref_text = compare_accent(user_audio, reference_audio)
-        print(score, weak_phonemes, ref_text)
+        # Output JSON for easy parsing by Node.js
+        result = {
+            "score": float(score),
+            "weak_phonemes": [(w, float(s)) for w, s in weak_phonemes],
+            "ref_text": ref_text
+        }
+        print(json.dumps(result))
     except RuntimeError as e:
-        print(f"Error: {e}")
+        print(json.dumps({"error": str(e)}))
+        sys.exit(1)
 
     # Optionally feed this to LLM for natural feedback
     # feedback_prompt = f"""
