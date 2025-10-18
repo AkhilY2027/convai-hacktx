@@ -28,7 +28,7 @@ export function ConvAI() {
         if (!res.ok) throw new Error("Failed to fetch accent audio");
         const audioBlob = await res.blob();
         setTargetAudioUrl(URL.createObjectURL(audioBlob));
-      } catch (_) {
+      } catch {
         setTargetAudioUrl(null);
       }
     }
@@ -77,14 +77,14 @@ export function ConvAI() {
                 const data = await res.json();
                 setFeedback(data);
               }
-            } catch (_) {
+            } catch {
               setFeedback(null);
             }
           }
         };
         mediaRecorder.start();
         setIsRecording(true);
-      } catch (_) {
+      } catch {
         alert("Could not access microphone. Please check permissions.");
       }
     }

@@ -6,9 +6,9 @@ export async function POST(req: Request) {
 
   // Map accent to ElevenLabs voice ID (replace with your own voice IDs)
   const accentVoiceMap: Record<string, string> = {
-    british: "EXAVITQu4vr4xnSDxMaL", // Example British voice ID
-    australian: "ErXwobaYiN019PkySvjV", // Example Australian voice ID
-    indian: "TxGEqnHWrfWFTfGW9XjX", // Example Indian voice ID
+    british: "EtsjFhqOd0YWASYxlmIg",
+    australian: "WLKp2jV6nrS8aMkPPDRO",
+    indian: "3gsg3cxXyFLcGIfNbM6C",
     // Add more accents and their voice IDs here
   };
 
